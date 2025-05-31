@@ -134,4 +134,4 @@ enviamos un error 404 Not Found.
 3. Redirige la petición al archivo PHP adecuado según el
 módulo.
 4. Maneja solicitudes OPTIONS automáticamente para CORS.
-5. Si algo falla, responde con un mensaje de error en JSON.
+5. Si algo falla, responde con un mensaje de error en JSON.*/
