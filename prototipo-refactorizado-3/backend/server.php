@@ -75,7 +75,7 @@ pidió el navegador.
 3. parse_str(...): convierte el string en un array
 asociativo.
 4. Resultado: $query_array['module'] tendrá el valor
-'students'./
+'students'./*/
 
 
 
@@ -84,8 +84,8 @@ if (!$module)
 {
     sendCodeMessage(400, "Módulo no especificado");
 }
-    Si no se especificó el parámetro module, respondemos con un
-error 400 usando la función auxiliar: sendCodeMessage.
+    /*Si no se especificó el parámetro module, respondemos con un
+error 400 usando la función auxiliar: sendCodeMessage.*/
 
 
 
@@ -94,22 +94,22 @@ if (!preg_match('/^\w+$/', $module))
 {
     sendCodeMessage(400, "Nombre de módulo inválido");
 }
-    Si el nombre del módulo contiene caracteres no permitidos,
+   /* Si el nombre del módulo contiene caracteres no permitidos,
 también damos error.
 ● La expresión regular ^\w+$ significa: solo letras,
 números y guiones bajos.
 ● Esto protege contra inyecciones de código o rutas
-maliciosas.
+maliciosas.*/
 
 
 
 // Buscar el archivo de ruta correspondiente
 $routeFile = __DIR__ . "/routes/{$module}Routes.php";
-Construimos el path del archivo PHP que maneja ese módulo.Por
+/*Construimos el path del archivo PHP que maneja ese módulo.Por
 ejemplo, si $module es 'students', entonces el archivo es:
 backend/routes/studentsRoutes.php.
 __DIR__ es una constante que contiene la ruta de esta carpeta
-(backend/).
+(backend/).*/
 
 
 
@@ -121,7 +121,7 @@ else
 {
     sendCodeMessage(404, "Ruta para el módulo '{$module}' no encontrada");
 }
-    Si el archivo existe, lo cargamos y ejecutamos con
+   /* Si el archivo existe, lo cargamos y ejecutamos con
 require_once. Ese archivo será responsable de manejar el GET,
 POST, PUT, DELETE del módulo. Si el archivo no existe,
 enviamos un error 404 Not Found.
