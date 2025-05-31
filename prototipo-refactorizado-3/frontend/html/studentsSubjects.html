@@ -1,0 +1,115 @@
+<!-- frontend/html/studentsSubjects.html -->
+
+<!--Este archivo HTML forma parte del frontend del módulo
+students_subjects, y su propósito es permitir que un usuario:
+● Asocie un estudiante con una materia.
+● Marque si dicha materia está aprobada por el estudiante.
+● Visualice todas las relaciones actuales.
+● Edite o elimine relaciones existentes.
+
+¿Qué tipo de relación representa?
+Estamos trabajando con una tabla intermedia (habitualmente
+llamada students_subjects), que:
+● Asocia IDs de estudiantes y IDs de materias.
+● Incluye un campo adicional: approved (booleano).
+Esto genera una interfaz ligeramente distinta a los módulos
+“simples” (students, subjects), ya que hay que seleccionar dos
+entidades externas y manipular un atributo adicional
+(approved).-->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inscripción de Estudiantes a Materias</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon.png">
+  <link rel="stylesheet" href="../css/w3.css" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <script type="module" src="../js/controllers/studentsSubjectsController.js"></script>
+  <!--Se importa el controlador JS del módulo
+(studentsSubjectsController.js), el cual será el encargado de:
+● Cargar las listas de estudiantes y materias.
+● Manejar eventos del formulario.
+● Llenar la tabla con datos.
+● Hacer peticiones fetch al backend usando una capa
+studentsSubjectsAPI.js.-->
+</head>
+
+<body class="w3-container">
+
+  <h2 class="w3-center w3-margin-top">Asignación de Estudiantes - Materias</h2>
+
+  <form id="relationForm" class="w3-card w3-padding w3-margin-bottom w3-light-grey"> <!--Formulario de asignación (#relationForm)-->
+    <!--● 📌Este formulario permite crear o editar una relación
+estudiante ↔ materia.
+● Tiene un <input type="hidden" id="relationId" /> para
+guardar el ID de la relación (para editar).-->
+    <input type="hidden" id="relationId" />
+
+    <div class="w3-row-padding">
+      <div class="w3-third">
+        <label>Estudiante</label>
+        <select id="studentIdSelect" class="w3-select" required>
+          <option value="" disabled selected>Seleccionar estudiante</option>
+          <!-- Opciones se cargan dinámicamente desde JS (studentsAPI.fetchAll()) -->
+        </select>
+      </div>
+      <div class="w3-third">
+        <label>Materia</label>
+        <select id="subjectIdSelect" class="w3-select" required>
+          <option value="" disabled selected>Seleccionar materia</option>
+          <!-- Opciones se cargan dinámicamente desde JS -->
+        </select>
+      </div>
+      <div class="w3-third">
+        <label>Aprobado</label>
+        <input type="checkbox" id="approved" class="w3-check" />
+        <!--Permite marcar si el estudiante aprobó esa materia.-->
+      </div>
+    </div>
+
+    <div class="w3-margin-top">
+      <button class="w3-button w3-green" type="submit">Guardar</button>
+      <button id="cancelBtn" class="w3-button w3-grey" type="reset">Cancelar</button>
+      <!--● Guardar: Crea o actualiza la relación.
+● Cancelar: Limpia el formulario y desactiva el modo
+edición.-->
+    </div>
+  </form>
+
+  <table class="w3-table-all w3-hoverable w3-card">
+    <thead>
+      <tr class="w3-light-blue">
+        <th>Estudiante</th>
+        <th>Materia</th>
+        <th>Aprobado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="relationTableBody"></tbody>
+  </table>
+  <!--Esta tabla se completa dinámicamente. Cada fila representa una
+relación entre un estudiante y una materia, e incluye:
+● Nombre del estudiante.
+● Nombre de la materia.
+● Un Sí/No visual si está aprobada.
+● Acciones (botones de editar y eliminar).-->
+
+<!--Estructura semántica completa
+
+<select id="studentIdSelect"> Selector dinámico de estudiante.
+<select id="subjectIdSelect"> Selector dinámico demateria.
+<input type="checkbox" id="approved"> Checkbox para marcar si la materia está aprobada.
+<input type="hidden" id="relationId"> Oculto para almacenar el ID interno de la relación (modo edición).
+<form id="relationForm"> Usado para crear o editar relaciones.
+<tbody id="relationTableBody"> Contenedor donde se insertan las relaciones actuales vía DOM.
+  
+-->
+
+  <footer class="w3-center w3-margin-top">
+    <a class="w3-btn w3-black" href="../index.html">Volver al Panel Principal</a>
+  </footer>
+  
+</body>
+</html>
